@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 
 //interfaces
 import { IListas } from "../interfaces/Listas";
@@ -14,9 +14,15 @@ const ListasForms = ({btnText}: Props) => {
 
     const [titulo,setTitulo] = useState<string>('');
 
+    const adicionarLista = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        alert(titulo);
+    }
+
     return(
         <>
-            <form className={styles.form}>
+            <form onSubmit={adicionarLista} className={styles.form}>
                 <div className={styles.input_container}>
                     <input 
                         type='text' 

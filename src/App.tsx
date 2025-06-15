@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+//interfaces
+import { IListas } from './interfaces/Listas'; 
 
 //components
 import Header from './components/Header';
@@ -9,8 +12,12 @@ import Footer from './components/Footer';
 
 //paginas
 import ListasForms from './components/ListasForms';
+import ListasTable from './components/ListasTable';
 
 function App() {
+
+  const [listas,setListas] = useState<IListas[]>([]);
+
   return (
     <div>
       <Header />
@@ -26,9 +33,12 @@ function App() {
             <div className="tab-content" id="nav-tabContent">
               <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                 <ListasForms btnText='Criar Listas'/>
+                <ListasTable listas={listas} setListas={setListas} />
               </div>
-              <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Tarefas</div>
-              <div className="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">Lista de Tarefas</div>
+              <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                Tarefas
+              </div>
+              <div className="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">ListaAAA de Tarefas</div>
             </div>
           </div>
        </main>
