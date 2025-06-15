@@ -14,12 +14,24 @@ import Footer from './components/Footer';
 import ListasForms from './components/ListasForms';
 import ListasTable from './components/ListasTable';
 
+//modal
+import Modal from './components/Modal';
+
 function App() {
 
   const [listas,setListas] = useState<IListas[]>([]);
+  const [id, setId] = useState<number>();
+
+  const mostrarOuEsconderModal = (id: number) => {
+     const modal = document.querySelector("#modal");
+
+     modal!.classList.remove('d-none')
+     setId(id);
+  } 
 
   return (
     <div>
+      <Modal id={id}/>
       <Header />
        <main className={sytles.main}>
           <div>
@@ -33,7 +45,10 @@ function App() {
             <div className="tab-content" id="nav-tabContent">
               <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                 <ListasForms />
-                <ListasTable listas={listas} setListas={setListas} />
+                <ListasTable 
+                  listas={listas} 
+                  setListas={setListas}
+                  mostrarOuEsconderModal={mostrarOuEsconderModal} />
               </div>
               <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                 Tarefas

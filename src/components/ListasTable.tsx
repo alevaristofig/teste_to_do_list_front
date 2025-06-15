@@ -10,10 +10,11 @@ import styles from './css/Listas.module.css';
 
 interface Props {
     listas: IListas[],
-    setListas?: React.Dispatch<React.SetStateAction<IListas[]>>
+    setListas?: React.Dispatch<React.SetStateAction<IListas[]>>,
+    mostrarOuEsconderModal(id: number): void
 }
 
-const ListasTable = ({listas, setListas}: Props) => {
+const ListasTable = ({listas, setListas, mostrarOuEsconderModal}: Props) => {
 
     useEffect(() => {
 
@@ -56,7 +57,7 @@ const ListasTable = ({listas, setListas}: Props) => {
                                         <h4>{l.titulo}</h4>                                    
                                     </div>
                                     <div className={styles.acoes}>
-                                        <i className='bi bi-pencil' onClick={() => editarLista(l.id)}></i>
+                                        <i className='bi bi-pencil' onClick={() => mostrarOuEsconderModal(l.id)}></i>
                                         <i className='bi bi-trash' onClick={() => deletarLista(l.id)}></i>
                                     </div>
                                 </div>
