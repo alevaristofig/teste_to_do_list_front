@@ -16,17 +16,15 @@ interface Props {
 const ListasTable = ({listas, setListas}: Props) => {
 
     useEffect(() => {
-        
-        //async function listar() {
 
-            axios.get('http://localhost:8000/api/v1/todo/listas')                   
-                    .then((response) => {
-                        setListas!(response.data);
-                        return response.data;
-                    })
-                    .catch((error) => {                            
-                        return false;
-                    });
+        axios.get('http://localhost:8000/api/v1/todo/listas')                   
+            .then((response) => {
+                setListas!(response.data);
+                return response.data;
+            })
+            .catch((error) => {                            
+                return false;
+            });
     },[]);
 
         const editarLista = (id: number) => {
@@ -34,7 +32,15 @@ const ListasTable = ({listas, setListas}: Props) => {
         }
 
         const deletarLista = (id: number) => {
-
+            axios.delete(`http://localhost:8000/api/v1/todo/listas/${id}`)                   
+                .then((response) => {
+                   // setListas!(response.data);
+                    //return response.data;
+                    alert("Lista removida com sucesso")
+                })
+                .catch((error) => {                            
+                    return false;
+                });
         }
 
     return(

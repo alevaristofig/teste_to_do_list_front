@@ -32,7 +32,7 @@ function App() {
             </nav>
             <div className="tab-content" id="nav-tabContent">
               <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                <ListasForms btnText='Criar Listas'/>
+                <ListasForms />
                 <ListasTable listas={listas} setListas={setListas} />
               </div>
               <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
