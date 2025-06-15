@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 //interfaces
-import { IListas } from './interfaces/Listas'; 
+import { ITarefas } from './interfaces/Tarefas'; 
 
 //components
 import Header from './components/Header';
@@ -12,18 +12,18 @@ import Footer from './components/Footer';
 
 //paginas
 import LoginForm from './components/LoginForm';
-import ListasForms from './components/ListasForms';
-import ListasTable from './components/ListasTable';
+import TarefasForm from './components/TarefasForm'; 
+import TarefasLista from './components/TarefasLista';
 
 //modal
 import Modal from './components/Modal';
 
 function App() {
 
-  const [listas,setListas] = useState<IListas[]>([]);
-  const [dados, setDados] = useState<IListas>();
+  const [listas,setListas] = useState<ITarefas[]>([]);
+  const [dados, setDados] = useState<ITarefas>();
 
-  const mostrarOuEsconderModal = (dados: IListas) => {
+  const mostrarOuEsconderModal = (dados: ITarefas) => {
      const modal = document.querySelector("#modal");
 
      modal!.classList.remove('d-none')     
@@ -37,8 +37,8 @@ function App() {
        <main className={sytles.main}>
           <div>
               <LoginForm />
-              <ListasForms />
-              <ListasTable 
+              <TarefasForm />
+              <TarefasLista 
                   listas={listas} 
                   setListas={setListas}
                   mostrarOuEsconderModal={mostrarOuEsconderModal} />

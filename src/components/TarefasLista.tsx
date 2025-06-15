@@ -3,18 +3,18 @@ import axios from "axios";
 
 
 //interfaces
-import { IListas } from "../interfaces/Listas"; 
+import { ITarefas } from "../interfaces/Tarefas";
 
 //css
-import styles from './css/Listas.module.css';
+import styles from './css/Tarefas.module.css';
 
 interface Props {
-    listas: IListas[],
-    setListas?: React.Dispatch<React.SetStateAction<IListas[]>>,
-    mostrarOuEsconderModal(dados: IListas): void
+    listas: ITarefas[],
+    setListas?: React.Dispatch<React.SetStateAction<ITarefas[]>>,
+    mostrarOuEsconderModal(dados: ITarefas): void
 }
 
-const ListasTable = ({listas, setListas, mostrarOuEsconderModal}: Props) => {
+const TarefasLista = ({listas, setListas, mostrarOuEsconderModal}: Props) => {
 
     useEffect(() => {
         if(sessionStorage.getItem('token') === null) {      
@@ -91,4 +91,4 @@ const ListasTable = ({listas, setListas, mostrarOuEsconderModal}: Props) => {
     )
 }
 
-export default ListasTable;
+export default TarefasLista;

@@ -2,7 +2,7 @@ import React, { useState, FormEvent } from "react";
 import axios from "axios";
 
 //css
-import styles from './css/ListasForm.module.css';
+import styles from './css/TarefasForm.module.css';
 
 const LoginForm = () => {
 

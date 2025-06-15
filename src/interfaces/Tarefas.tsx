@@ -1,4 +1,4 @@
-export interface IListas {
+export interface ITarefas {
     id: number,
     titulo: string,
     tempo: string,

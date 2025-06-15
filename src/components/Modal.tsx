@@ -2,14 +2,14 @@ import React, { useEffect, useState, FormEvent } from "react";
 import axios from "axios";
 
 //interfaces
-import { IListas } from "../interfaces/Listas"; 
+import { ITarefas } from "../interfaces/Tarefas";
 
 //css
 import styles from './css/Modal.module.css';
-import stylesForm from './css/ListasForm.module.css';
+import stylesForm from './css/Tarefas.module.css';
 
 interface Props {
-    dados?: IListas
+    dados?: ITarefas
 }
 
 const Modal = ({dados}: Props) => {

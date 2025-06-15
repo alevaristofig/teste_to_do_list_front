@@ -2,12 +2,11 @@ import React, { useEffect, useState, FormEvent } from "react";
 import axios from "axios";
 
 //interfaces
-import { IListas } from "../interfaces/Listas";
-
+import { ITarefas } from "../interfaces/Tarefas"; 
 //css
-import styles from './css/ListasForm.module.css';
+import styles from './css/TarefasForm.module.css';
 
-const ListasForms = () => {
+const TarefasForm = () => {
 
     const [titulo,setTitulo] = useState<string>('');
     const [tempo,setTempo] = useState<string>('');
@@ -99,4 +98,4 @@ const ListasForms = () => {
     )
 }
 
-export default ListasForms;
+export default TarefasForm;
