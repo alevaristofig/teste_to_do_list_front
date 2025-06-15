@@ -11,6 +11,7 @@ import sytles from './App.module.css';
 import Footer from './components/Footer';
 
 //paginas
+import LoginForm from './components/LoginForm';
 import ListasForms from './components/ListasForms';
 import ListasTable from './components/ListasTable';
 
@@ -21,16 +22,12 @@ function App() {
 
   const [listas,setListas] = useState<IListas[]>([]);
   const [dados, setDados] = useState<IListas>();
-  //const [id, setId] = useState<number>();
-  //const [titulo,setTitulo] = useState<string>('');
 
   const mostrarOuEsconderModal = (dados: IListas) => {
      const modal = document.querySelector("#modal");
 
-     modal!.classList.remove('d-none')
+     modal!.classList.remove('d-none')     
      setDados(dados);
-    // setId(id);
-    // setTitulo(titulo);
   } 
 
   return (
@@ -39,6 +36,7 @@ function App() {
       <Header />
        <main className={sytles.main}>
           <div>
+              <LoginForm />
               <ListasForms />
               <ListasTable 
                   listas={listas} 

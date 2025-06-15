@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from "react";
+import React, { useEffect, useState, FormEvent } from "react";
 import axios from "axios";
 
 //interfaces
@@ -11,7 +11,25 @@ const ListasForms = () => {
 
     const [titulo,setTitulo] = useState<string>('');
     const [tempo,setTempo] = useState<string>('');
-    const [dificuldade,setDificuldade] = useState<string>('');
+    const [finalizada,setFinalizada] = useState<string>('');
+
+    useEffect(() => {
+        if(sessionStorage.getItem('token') === null) {      
+            let form = document.getElementById('formTarefa');
+
+            if(form) {
+                 form.style.display = 'none';
+            }
+        } else {
+            let form = document.getElementById('formTarefa');
+            let formLogin = document.getElementById('formLogin');
+
+            if(form && formLogin) {
+                 form.style.display = 'flex';
+                 formLogin.style.display = 'none';
+            }
+        }
+    },[])
 
     const adicionarLista = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -19,10 +37,14 @@ const ListasForms = () => {
         let dados = {
             'titulo': titulo,
             'tempo': tempo,
-            'dificuldade': dificuldade
+            'finalizada': finalizada
         }
 
-        axios.post('http://localhost:8000/api/v1/todo/tarefas',dados)                   
+        axios.post('http://localhost:8000/api/v1/todo/tarefas',dados,{
+                headers: {
+                        "Authorization": `Bearer ${sessionStorage.getItem('token')}`,                
+                }
+            })                   
             .then((response) => {                
                 alert('Lista cadastrada com Sucesso');
                 window.location.reload();
@@ -32,11 +54,13 @@ const ListasForms = () => {
             });
 
         setTitulo('');
+        setTempo('');
+        setFinalizada('');
     }
 
     return(
         <>
-            <form onSubmit={adicionarLista} className={styles.form}>
+            <form id="formTarefa" onSubmit={adicionarLista} className={styles.form}>
                 <div className={styles.input_container}>
                     <input 
                         type='text' 
@@ -52,13 +76,22 @@ const ListasForms = () => {
                         onChange={(e) => setTempo(e.target.value)} 
                         value={tempo}
                     />
-                    <input 
-                        type='text' 
-                        name='tempo' 
-                        placeholder='Dificuldade da Tarefa' 
-                        onChange={(e) => setDificuldade(e.target.value)} 
-                        value={dificuldade}
-                    />
+                    <div className="text-start">
+                        <label className="me-2">Finalizada</label>
+                        <input 
+                            type='radio' 
+                            name='finalizada'                         
+                            onChange={(e) => setFinalizada(e.target.value)} 
+                            value="S"
+                        /> Sim
+                        <input 
+                            className="ms-3"
+                            type='radio' 
+                            name='finalizada'                        
+                            onChange={(e) => setFinalizada(e.target.value)} 
+                            value="N"
+                        /> Não
+                    </div>
                 </div>
                 <input type="submit" value='Criar Tarefa' />
             </form>

@@ -4,3 +4,8 @@
     text-align: center;
     padding: 1em;
 }
+
+.button_sair {
+    float: right;
+    margin-top: -50px;
+}

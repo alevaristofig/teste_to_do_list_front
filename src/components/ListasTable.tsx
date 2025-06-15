@@ -17,8 +17,27 @@ interface Props {
 const ListasTable = ({listas, setListas, mostrarOuEsconderModal}: Props) => {
 
     useEffect(() => {
+        if(sessionStorage.getItem('token') === null) {      
+            let form = document.getElementById('divListaTarefas');
 
-        axios.get('http://localhost:8000/api/v1/todo/tarefas')                   
+            if(form) {
+                 form.style.display = 'none';
+            }
+        } else {
+            let form = document.getElementById('divListaTarefas');
+            let formLogin = document.getElementById('formLogin');
+
+            if(form && formLogin) {
+                 form.style.display = 'flex';
+                 formLogin.style.display = 'none';
+            }
+        }
+
+        axios.get('http://localhost:8000/api/v1/todo/tarefas',{
+                headers: {
+                    "Authorization": `Bearer ${sessionStorage.getItem('token')}`,                
+                }
+            })                   
             .then((response) => {
                 setListas!(response.data);
                 return response.data;
@@ -28,16 +47,15 @@ const ListasTable = ({listas, setListas, mostrarOuEsconderModal}: Props) => {
             });
     },[]);
 
-        const editarLista = (id: number) => {
-
-        }
-
-        const deletarLista = (id: number) => {
-            axios.delete(`http://localhost:8000/api/v1/todo/tarefas/${id}`)                   
-                .then((response) => {
-                   // setListas!(response.data);
-                    //return response.data;
-                    alert("Lista removida com sucesso")
+    const deletarLista = (id: number) => {
+            axios.delete(`http://localhost:8000/api/v1/todo/tarefas/${id}`,{
+                    headers: {
+                        "Authorization": `Bearer ${sessionStorage.getItem('token')}`,                
+                    }
+                })                   
+                .then((response) => {                  
+                    alert("Lista removida com sucesso");
+                     window.location.reload();
                 })
                 .catch((error) => {                            
                     return false;
@@ -46,7 +64,7 @@ const ListasTable = ({listas, setListas, mostrarOuEsconderModal}: Props) => {
 
     return(
         <>
-            <div>               
+            <div id="divListaTarefas" className={styles.hideDiv}>               
                 {
                     listas.length > 0
                     ?
@@ -65,7 +83,7 @@ const ListasTable = ({listas, setListas, mostrarOuEsconderModal}: Props) => {
                         )
                     :
                      (
-                        <p>Não há listas cadastradas - { listas.length }</p>
+                        <p>Não há listas cadastradas</p>
                      )
                 }
             </div>

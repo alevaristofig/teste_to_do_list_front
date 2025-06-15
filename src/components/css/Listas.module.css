@@ -1,10 +1,16 @@
 .listas {
-    display: flex;
-   
+    display: flex;   
     width: 400px;
     margin: 0 auto;
     border-bottom: 1px solid #ccc;
     padding: 1em;
+}
+
+.hideDiv {
+    display: none;
+    max-width: 400px;
+    margin: 0 auto;
+    flex-direction: column;
 }
 
 .detalhes {
@@ -41,4 +47,8 @@
 
 .acoes i:hover {
     color: #61dafb;
+}
+
+.pointer {
+    cursor: pointer;
 }

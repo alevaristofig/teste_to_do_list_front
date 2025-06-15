@@ -9,16 +9,14 @@ import styles from './css/Modal.module.css';
 import stylesForm from './css/ListasForm.module.css';
 
 interface Props {
-    dados?: IListas,
-   // titulo?: string,
-    //setTitulo?: React.Dispatch<React.SetStateAction<string>>,
+    dados?: IListas
 }
 
 const Modal = ({dados}: Props) => {
 
     const [titulo,setTitulo] = useState<string>('');
     const [tempo,setTempo] = useState<string>('');
-    const [dificuldade,setDificuldade] = useState<string>('');
+    const [finalizada,setFinalizada] = useState<string>('');
 
     const fecharModal = (e: React.MouseEvent): void => {
         const modal = document.querySelector("#modal");
@@ -26,17 +24,20 @@ const Modal = ({dados}: Props) => {
     };
 
     const editarLista = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-       // alert(dados?.id+','+titulo+','+tempo+','+dificuldade)
+        e.preventDefault();       
 
         let data = {
             'id': dados?.id,
             'titulo': titulo,
             'tempo': tempo,
-            'dificuldade': dificuldade
+            'finalizada': finalizada
         }
 
-        axios.put(`http://localhost:8000/api/v1/todo/tarefas/${dados?.id}`,data)                   
+        axios.put(`http://localhost:8000/api/v1/todo/tarefas/${dados?.id}`,data,{
+                headers: {
+                        "Authorization": `Bearer ${sessionStorage.getItem('token')}`,                
+                }
+            })                   
             .then((response) => {               
                 alert('Tarefa editada com Sucesso');
                 window.location.reload();
@@ -65,17 +66,28 @@ const Modal = ({dados}: Props) => {
                         placeholder='Tempo da Tarefa' 
                         onChange={(e) => setTempo(e.target.value)} 
                         defaultValue={dados?.tempo}
-                    />
-                    <input 
-                        type='text' 
-                        name='tempo' 
-                        placeholder='Dificuldade da Tarefa' 
-                        onChange={(e) => setDificuldade(e.target.value)} 
-                        defaultValue={dados?.dificuldade}
-                    />
+                        />
+                        <div className="text-start">
+                            <label className="me-2">Finalizada</label>
+                            <input 
+                                type='radio' 
+                                name='finalizada'                         
+                                onChange={(e) => setFinalizada(e.target.value)} 
+                                value="S"   
+                                checked={dados?.finalizada === 'S'}                         
+                            /> Sim 
+                            <input 
+                                className="ms-3"
+                                type='radio' 
+                                name='finalizada'                        
+                                onChange={(e) => setFinalizada(e.target.value)} 
+                                value="N"
+                                checked={dados?.finalizada === 'N'}  
+                            /> Não
+                    </div>
                     </div>
                     <input type="submit" value='Editar Lista' />
-                    <div onClick={fecharModal} className="mt-2 text-danger fs-5 pe-auto">X</div>
+                    <div onClick={fecharModal} className="mt-2 text-danger fs-5 pointer">X</div>
                 </form>
                 
             </div>
