@@ -3,3 +3,10 @@
     text-align: center;
     padding: 2em;
 }
+
+.menu {
+    width: 330px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
