@@ -11,14 +11,14 @@ import styles from './css/Listas.module.css';
 interface Props {
     listas: IListas[],
     setListas?: React.Dispatch<React.SetStateAction<IListas[]>>,
-    mostrarOuEsconderModal(id: number): void
+    mostrarOuEsconderModal(dados: IListas): void
 }
 
 const ListasTable = ({listas, setListas, mostrarOuEsconderModal}: Props) => {
 
     useEffect(() => {
 
-        axios.get('http://localhost:8000/api/v1/todo/listas')                   
+        axios.get('http://localhost:8000/api/v1/todo/tarefas')                   
             .then((response) => {
                 setListas!(response.data);
                 return response.data;
@@ -33,7 +33,7 @@ const ListasTable = ({listas, setListas, mostrarOuEsconderModal}: Props) => {
         }
 
         const deletarLista = (id: number) => {
-            axios.delete(`http://localhost:8000/api/v1/todo/listas/${id}`)                   
+            axios.delete(`http://localhost:8000/api/v1/todo/tarefas/${id}`)                   
                 .then((response) => {
                    // setListas!(response.data);
                     //return response.data;
@@ -57,7 +57,7 @@ const ListasTable = ({listas, setListas, mostrarOuEsconderModal}: Props) => {
                                         <h4>{l.titulo}</h4>                                    
                                     </div>
                                     <div className={styles.acoes}>
-                                        <i className='bi bi-pencil' onClick={() => mostrarOuEsconderModal(l.id)}></i>
+                                        <i className='bi bi-pencil' onClick={() => mostrarOuEsconderModal(l)}></i>
                                         <i className='bi bi-trash' onClick={() => deletarLista(l.id)}></i>
                                     </div>
                                 </div>

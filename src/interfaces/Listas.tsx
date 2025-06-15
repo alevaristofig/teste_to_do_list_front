@@ -1,4 +1,6 @@
 export interface IListas {
     id: number,
-    titulo: string
+    titulo: string,
+    tempo: string,
+    dificuldade: number
 }
