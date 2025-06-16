@@ -6,7 +6,7 @@ import { ITarefas } from "../interfaces/Tarefas";
 
 //css
 import styles from './css/Modal.module.css';
-import stylesForm from './css/Tarefas.module.css';
+import stylesForm from './css/TarefasForm.module.css';
 
 interface Props {
     dados?: ITarefas
@@ -50,46 +50,45 @@ const Modal = ({dados}: Props) => {
     return(
         <>
             <div id="modal" className='d-none'>            
-            <div className={styles.modal}>
-                <form onSubmit={editarLista} className={stylesForm.form}>
-                    <div className={stylesForm.input_container}>
-                        <input 
+                <div className={styles.modal}>
+                    <form onSubmit={editarLista} className={stylesForm.form}>
+                        <div className={stylesForm.input_container}>
+                            <input 
+                                type='text' 
+                                name='titulo' 
+                                placeholder='Título da Lista' 
+                                onChange={(e) => setTitulo(e.target.value)} 
+                                defaultValue={dados?.titulo}
+                            />
+                            <input 
                             type='text' 
-                            name='titulo' 
-                            placeholder='Título da Lista' 
-                            onChange={(e) => setTitulo(e.target.value)} 
-                            defaultValue={dados?.titulo}
-                        />
-                        <input 
-                        type='text' 
-                        name='tempo' 
-                        placeholder='Tempo da Tarefa' 
-                        onChange={(e) => setTempo(e.target.value)} 
-                        defaultValue={dados?.tempo}
-                        />
-                        <div className="text-start">
-                            <label className="me-2">Finalizada</label>
-                            <input 
-                                type='radio' 
-                                name='finalizada'                         
-                                onChange={(e) => setFinalizada(e.target.value)} 
-                                value="S"   
-                                checked={dados?.finalizada === 'S'}                         
-                            /> Sim 
-                            <input 
-                                className="ms-3"
-                                type='radio' 
-                                name='finalizada'                        
-                                onChange={(e) => setFinalizada(e.target.value)} 
-                                value="N"
-                                checked={dados?.finalizada === 'N'}  
-                            /> Não
-                    </div>
-                    </div>
-                    <input type="submit" value='Editar Lista' />
-                    <div onClick={fecharModal} className="mt-2 text-danger fs-5 pointer">X</div>
-                </form>
-                
+                            name='tempo' 
+                            placeholder='Tempo da Tarefa' 
+                            onChange={(e) => setTempo(e.target.value)} 
+                            defaultValue={dados?.tempo}
+                            />
+                            <div className="text-start">
+                                <label className="me-2">Finalizada</label>
+                                <input 
+                                    type='radio' 
+                                    name='finalizada'                         
+                                    onChange={(e) => setFinalizada(e.target.value)} 
+                                    value="S"   
+                                    checked={dados?.finalizada === 'S'}                         
+                                /> Sim 
+                                <input 
+                                    className="ms-3"
+                                    type='radio' 
+                                    name='finalizada'                        
+                                    onChange={(e) => setFinalizada(e.target.value)} 
+                                    value="N"
+                                    checked={dados?.finalizada === 'N'}  
+                                /> Não
+                        </div>
+                        </div>
+                        <input type="submit" value='Editar Lista' />
+                        <div onClick={fecharModal} className="mt-2 text-danger fs-5" style={{cursor: 'pointer'}}>X</div>
+                    </form>                
             </div>
         </div>
         </>
