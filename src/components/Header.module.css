@@ -1,0 +1,11 @@
+.header {
+    background-color: #282c34;
+    color: #61dafb;
+    text-align: center;
+    padding: 1em;
+}
+
+.button_sair {
+    float: right;
+    margin-top: -50px;
+}
